@@ -4,6 +4,11 @@ Each course is a group of ~--funcs functions, grown greedily from the function s
 
 Graded by execution against the test cases (see graders.grade_exec).
 
+Only verified rows are used by default: rows whose own NumPy reference solution (`example_output`), run through
+the same harness, reproduces the stored ground truth. The others are ambiguous or mislabeled (about 12% of
+train, 12% of single_test and 19% of multiple_test) and would also give the student wrong feedback in study
+sessions. The check runs once and is cached in data/sebench/verified.json; --all-rows skips it.
+
 Data: data/sebench/{train,single_test,multiple_test}.jsonl from huggingface.co/datasets/jintailin/SE-Bench,
 data/sebench/api_doc.jsonl and the zwc package in data/sebench/zwc from github.com/thunlp/SE-Bench
 (fetch all of it with `bash teachlab/download_sebench.sh`).
@@ -17,10 +22,15 @@ import argparse
 import json
 import os
 import random
+import re
+from concurrent.futures import ThreadPoolExecutor
 
+from .. import graders
 from ..schema import write_scenarios
 
 DATA = "data/sebench"
+VERIFIED = os.path.join(DATA, "verified.json")
+FILES = ("train", "single_test", "multiple_test")
 
 STUDENT_SYSTEM = ("You are a Python programmer. Your runtime has an unfamiliar numerical library called zwc and "
                   "NumPy is NOT installed, so every solution must be built on zwc functions.")
@@ -37,24 +47,79 @@ TASK_PROMPT = """### Problem
 ### Requirements
 - Solve the problem with the zwc library (`import zwc`). NumPy is not available, and re-implementing the logic without zwc is not allowed.
 - Keep the function name and parameters unchanged. You may import Python built-in modules.
-- Return a value with the same data structure as the example output. zwc arrays have no `.tolist()`; returning a zwc array is accepted, since the grader compares printed values.
+- Return a value with the same data structure as the example output. zwc arrays have no `.tolist()`; returning a zwc array is accepted (the grader converts it to plain Python values).
 - End your answer with the complete implementation in a single ```python``` block."""
 
 
 def load(name):
+    """Rows of data/sebench/<name>.jsonl, each tagged with `_row` = "<name>/<0-based line index>"."""
     with open(os.path.join(DATA, f"{name}.jsonl")) as f:
-        return [json.loads(l) for l in f if l.strip()]
+        rows = [json.loads(l) for l in f if l.strip()]
+    for i, r in enumerate(rows):
+        r["_row"] = f"{name}/{i}"
+    return rows
+
+
+def entry_name(row):
+    return row["function_name"].split("def ")[1].split("(")[0].strip()
 
 
 def to_item(row, split, uid):
     funcs = row["selected_functions"]
     return {
-        "id": uid, "split": split, "functions": funcs,
+        "id": uid, "split": split, "functions": funcs, "source_row": row["_row"],
         "messages": [{"role": "user", "content": TASK_PROMPT.format(
             query=row["query"].strip(), example=row["example"], signature=row["function_name"].strip())}],
-        "grader": {"type": "exec", "entry": row["function_name"].split("def ")[1].split("(")[0].strip(),
+        "grader": {"type": "exec", "entry": entry_name(row),
                    "test_cases": row["test_cases"], "expected": row["right_exe_result"].split("#"), "lib": "zwc"},
     }
+
+
+def zwc_path(doc):
+    """Full call path of a doc's function, e.g. zwc.falekef or zwc.rfx.gicopuf (the 31 linear-algebra functions
+    live in the rfx submodule; `zwc.<curr_name>` does not exist for them)."""
+    for path in json.loads(doc["func_mapping"]).values():
+        if path.split(".")[-1] == doc["curr_name"]:
+            return path
+    return f"zwc.{doc['curr_name']}"
+
+
+def reference_ok(row):
+    """Does the row's NumPy reference solution reproduce its stored ground truth through our harness?"""
+    code = row["example_output"][0]
+    entry = entry_name(row)
+    if not re.search(rf"\bdef\s+{re.escape(entry)}\s*\(", code):  # reference names its function differently
+        m = re.search(r"\bdef\s+([A-Za-z_]\w*)\s*\(", code)
+        if not m:
+            return False
+        entry = m.group(1)
+    results, _, _ = graders.run_and_compare(code, entry, row["test_cases"], row["right_exe_result"].split("#"))
+    return results is not None and all(r["ok"] for r in results)
+
+
+def verified_rows(rows_by_file):
+    """Set of verified `_row` ids, computed once and cached in VERIFIED (invalidated if the data changes)."""
+    sizes = {name: len(rows) for name, rows in rows_by_file.items()}
+    if os.path.exists(VERIFIED):
+        cached = json.load(open(VERIFIED))
+        if cached.get("sizes") == sizes:
+            return set(cached["ok"])
+    rows = [r for name in FILES for r in rows_by_file[name]]
+    print(f"verifying the NumPy reference solutions of {len(rows)} rows (once; cached in {VERIFIED}) ...")
+    with ThreadPoolExecutor(8) as ex:
+        ok = list(ex.map(reference_ok, rows))
+    good = [r["_row"] for r, o in zip(rows, ok) if o]
+    try:
+        import numpy
+        np_version = numpy.__version__
+    except ImportError:
+        np_version = None
+    json.dump({"numpy": np_version, "sizes": sizes, "ok": good,
+               "bad": [r["_row"] for r, o in zip(rows, ok) if not o]}, open(VERIFIED, "w"), indent=0)
+    for name in FILES:
+        n_ok = sum(g.startswith(name + "/") for g in good)
+        print(f"  {name}: {n_ok}/{sizes[name]} verified")
+    return set(good)
 
 
 def grow_courses(multi, n_funcs, n_courses, rng):
@@ -84,6 +149,8 @@ def main():
     p.add_argument("--doc-scope", choices=["course", "library"], default="course",
                    help="course: docs of the course's functions only; library: all ~270 zwc functions (~97k words)")
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--all-rows", action="store_true",
+                   help="Also use rows whose NumPy reference does not reproduce the ground truth (see module doc)")
     p.add_argument("--out", default=None)
     args = p.parse_args()
     rng = random.Random(args.seed)
@@ -97,16 +164,23 @@ def main():
 
     def knowledge(funcs):
         names = sorted(docs) if args.doc_scope == "library" else sorted(set(funcs) | {"array"})
-        body = "\n\n".join(f"### zwc.{docs[f]['curr_name']}  (function {i + 1})\n{docs[f]['rewritten_doc'].strip()}"
+        body = "\n\n".join(f"### {zwc_path(docs[f])}  (function {i + 1})\n{docs[f]['rewritten_doc'].strip()}"
                            for i, f in enumerate(names) if f in docs)
         return f"{quick}\n\n## Function reference\n\n{body}"
 
-    train = [r for r in load("train") if r.get("is_valid", True)]
-    single = [r for r in load("single_test") if r.get("is_valid", True)]
-    multi = [r for r in load("multiple_test") if r.get("is_valid", True)]
+    raw = {name: load(name) for name in FILES}
+    verified = None if args.all_rows else verified_rows(raw)
+    # Rows naming a function without documentation (one multiple_test row lists ['np', 'np', 'np']) are dropped.
+    usable = lambda r: (r.get("is_valid", True) and (verified is None or r["_row"] in verified)
+                        and all(f in docs for f in r["selected_functions"]))
+    train, single, multi = ([r for r in raw[name] if usable(r)] for name in FILES)
+    if not args.all_rows:
+        print(f"using verified rows: train {len(train)}, single_test {len(single)}, multiple_test {len(multi)}")
 
     # The variant tag goes into every id, so scenarios built with different settings never collide in one run.
-    variant = f"f{args.funcs}{'_lib' if args.doc_scope == 'library' else ''}{f'_s{args.seed}' if args.seed else ''}"
+    # "v" marks verified-only courses, so they never share ids with courses built from all rows (--all-rows).
+    variant = (f"f{args.funcs}{'' if args.all_rows else 'v'}{'_lib' if args.doc_scope == 'library' else ''}"
+               f"{f'_s{args.seed}' if args.seed else ''}")
     scenarios = []
     for ci, funcs in enumerate(grow_courses(multi, args.funcs, args.courses * 3, rng)):
         fs = set(funcs)
@@ -124,8 +198,9 @@ def main():
         kn = knowledge(funcs)
         scenarios.append({
             "id": sid, "source": "sebench",
-            "meta": {"functions": funcs, "zwc_names": [docs[f]["curr_name"] for f in funcs if f in docs],
-                     "doc_scope": args.doc_scope, "knowledge_words": len(kn.split())},
+            "meta": {"functions": funcs, "zwc_names": [zwc_path(docs[f]) for f in funcs if f in docs],
+                     "doc_scope": args.doc_scope, "verified_only": not args.all_rows,
+                     "knowledge_words": len(kn.split())},
             "knowledge": kn, "student_system": STUDENT_SYSTEM, "items": items,
         })
         if len(scenarios) == args.courses:

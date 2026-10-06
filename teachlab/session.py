@@ -24,6 +24,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from . import prompts as P
 from .graders import feedback, grade
+from .llm import NON_RETRYABLE
 from .schema import items, problem_text
 
 CONDITIONS = {
@@ -183,13 +184,26 @@ def safe_grade(ctx, item, response):
         return None
 
 
+def student_answer(ctx, messages):
+    """The student's reply, or ("", error) if the request can never succeed - e.g. a transcript memory that no
+    longer fits the context window. That answer is graded as empty and the error recorded, rather than killing
+    the whole scenario x condition job. Transient failures (server down after all retries) still raise, so an
+    outage stops the job (which then resumes) instead of being scored as wrong answers."""
+    try:
+        return ctx.student.chat(messages), None
+    except NON_RETRYABLE as e:
+        return "", f"{type(e).__name__}: {str(e)[:300]}"
+
+
 def attempt_and_grade(ctx, scn, item, messages):
-    response = ctx.student.chat(messages)
+    response, error = student_answer(ctx, messages)
     result = safe_grade(ctx, item, response)
+    out = {"response": response}
+    if error:
+        out["generation_error"] = error
     if result is None:
-        return {"response": response, "score": None, "passed": False, "feedback": "(The grader is unavailable.)"}
-    return {"response": response, "score": result["score"], "passed": result["passed"],
-            "feedback": feedback(item, result)}
+        return {**out, "score": None, "passed": False, "feedback": "(The grader is unavailable.)"}
+    return {**out, "score": result["score"], "passed": result["passed"], "feedback": feedback(item, result)}
 
 
 def attempts_phase(ctx, scn, item, state, open_book, retry):
@@ -234,7 +248,12 @@ def tutor_phase(ctx, scn, item, state, placebo):
             ended_by = "teacher"
             break
         dialogue.append(("teacher", text))
-        dialogue.append(("student", ctx.student.chat([student_sys] + flip(dialogue, "student"))))
+        reply, error = student_answer(ctx, [student_sys] + flip(dialogue, "student"))
+        if error:  # the student cannot answer (e.g. context overflow): end the dialogue, keep the record
+            ended_by = "student_error"
+            violations.append({"round": r + 1, "student_error": error})
+            break
+        dialogue.append(("student", reply))
     # The final attempt is in the session's own context (the dialogue), then graded like any attempt.
     final = attempt_and_grade(ctx, scn, item, [student_sys] + flip(dialogue, "student")
                               + [{"role": "user", "content": P.FINAL_ATTEMPT}])
@@ -265,6 +284,7 @@ def run_session(ctx, scn, cond, item, state, t):
     log.update({
         "first_attempt_score": rec["attempts"][0]["score"], "last_attempt_score": rec["attempts"][-1]["score"],
         "n_attempts": len(rec["attempts"]), "teacher_words": words(teacher_text),
+        "generation_errors": sum(1 for a in rec["attempts"] if a.get("generation_error")),
         "teacher_msgs": sum(1 for s, _ in rec.get("dialogue", []) if s == "teacher") + bool(rec.get("critique")),
         "teacher_copy_rate": ngram_overlap(teacher_text, scn["knowledge"]),
     })
@@ -294,12 +314,15 @@ def evaluate(ctx, scn, state, split, open_book=False):
     n = ctx.args.samples
 
     def one(item):
-        response = ctx.student.chat(student_messages(scn, item, state, open_book))
-        return response, safe_grade(ctx, item, response)
+        response, error = student_answer(ctx, student_messages(scn, item, state, open_book))
+        return response, safe_grade(ctx, item, response), error
 
     jobs = [it for it in todo for _ in range(n)]
     with ThreadPoolExecutor(max_workers=max(1, min(ctx.args.eval_workers, len(jobs)))) as ex:
-        outs = list(ex.map(one, jobs))
+        results = list(ex.map(one, jobs))
+    # Failed generations count as empty (wrong) answers; their number is reported as generation_errors.
+    gen_errors = [e for _, _, e in results if e]
+    outs = [(r, g) for r, g, _ in results]
     per_item, by_type, errors = [], {}, 0
     for i, it in enumerate(todo):
         graded = [(r, g) for r, g in outs[i * n:(i + 1) * n] if g is not None]
@@ -321,11 +344,14 @@ def evaluate(ctx, scn, state, split, open_book=False):
             for k, v in entry["by_type"].items():
                 by_type.setdefault(k, []).append(v)
         per_item.append(entry)
+    gen = {"generation_errors": len(gen_errors)}
+    if gen_errors:
+        gen["generation_error_example"] = gen_errors[0]
     if not per_item:
-        return {"score": None, "passed": None, "n_items": 0, "grading_errors": errors, "items": []}
+        return {"score": None, "passed": None, "n_items": 0, "grading_errors": errors, **gen, "items": []}
     summary = {"score": sum(e["score"] for e in per_item) / len(per_item),
                "passed": sum(e["passed"] for e in per_item) / len(per_item), "n_items": len(per_item),
-               "grading_errors": errors}
+               "grading_errors": errors, **gen}
     if by_type:
         summary["by_type"] = {k: sum(v) / len(v) for k, v in by_type.items()}
     return {**summary, "items": per_item}

@@ -35,11 +35,24 @@ One scenario is one course. The format is defined in [schema.py](teachlab/schema
 | adapter | command | size | grading |
 |---|---|---|---|
 | CL-bench (selected courses) | `python -m teachlab.adapters.clbench --contexts-from data/clbench/selected.jsonl` | 7–10 stream and ~3 test items per course; documents ~4–6k words | rubric |
-| SE-Bench (the zwc library) | `bash teachlab/download_sebench.sh && python -m teachlab.adapters.sebench --funcs 8` | 7–8 functions, 14–19 stream, 4–5 probe and 10–13 test items per course; documents ~2–4k words | exec |
+| SE-Bench (the zwc library) | `bash teachlab/download_sebench.sh && python -m teachlab.adapters.sebench --funcs 8` | 7–8 functions, 10–19 stream, 3–5 probe and 9–12 test items per course (verified rows); documents ~2.6–3.6k words | exec |
 | SE-Bench, full-library docs | the command above with `--doc-scope library` | document ~97k words, too large for the notebook | exec |
 | Generated rule worlds | `python -m teachlab.adapters.rule_world --ops 6 --length 3` | any number of items; `--ops` sets the knowledge volume, `--length` the difficulty of applying it | exact |
 
 **Adding a source**: write an adapter that outputs jsonl in the format above. Hand-written scenarios can also be written directly as jsonl.
+
+### SE-Bench details
+
+- **Verified rows only (default).** The adapter keeps rows whose own NumPy reference solution reproduces the stored ground truth. The rest are ambiguous or mislabeled: about 12% of train, 12% of single_test and 19% of multiple_test. The check runs once and is cached in `data/sebench/verified.json`.
+  - Verified courses have ids `sebench/f8v/...` and are written to `scenarios/sebench_f8v.jsonl`.
+  - `--all-rows` keeps every row, with the old `sebench/f8/...` ids.
+- **Function names.** The docs give each function's full call path, e.g. `zwc.rfx.gicopuf` for the 31 linear-algebra functions in the `rfx` submodule.
+- **Harness.** Its own `print()` calls are captured, so they cannot leak into case outputs. A returned zwc array is printed as plain Python values: zwc arrays print in NumPy's rounded display form, which otherwise fails correct answers.
+- **Execution.** Local execution uses pre-warmed fork servers on POSIX, so importing NumPy from a slow filesystem does not eat into the time limit. On other systems it uses one interpreter per program. Settings, as environment variables:
+  - `TEACHLAB_EXEC_TIMEOUT`: seconds per program; default 3, as in SE-Bench.
+  - `TEACHLAB_EXEC_SERVERS`: number of fork servers; default 4.
+  - `TEACHLAB_EXEC_MODE`: `fork` or `subprocess`.
+- **NumPy version.** Install `numpy==2.3.0`, the version zwc pins and SE-Bench's sandbox uses.
 
 ## Conditions
 
@@ -71,8 +84,13 @@ Full definitions are in [session.py](teachlab/session.py).
 
 ```bash
 --student Qwen/Qwen3-8B --student-url http://localhost:8000/v1 \
-  --student-extra '{"chat_template_kwargs": {"enable_thinking": false}}'
+  --student-extra '{"chat_template_kwargs": {"enable_thinking": false}}' --student-max-tokens 8192
 ```
+
+- `--{role}-max-tokens` caps completion tokens (sent as `max_completion_tokens`).
+- Requests that cannot succeed are not retried. That includes a prompt longer than the context window, which a growing `--memory transcript` will eventually produce on a small student.
+- A student request that can never succeed counts as an empty answer and is reported as `generation_errors` in the eval summary and the session log. It no longer stops the job.
+- Transient failures, such as a server that is down after all retries, still stop the job. The job then resumes.
 
 - An HTML report (learning curves, per-scenario curves, table view, memory diagnostic, and a session browser with dialogues, attempts, feedback, notebooks and test outputs):
 
