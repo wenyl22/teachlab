@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.DS_Store
+# Benchmark data: downloaded (data/sebench) or derived from CL-bench, whose data license is evaluation-only
+data/
+teachlab/scenarios/
+# Experiment outputs
+teachlab/outputs/
+*.log
+_*

@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>teachlab report</title>
+<style>
+.viz-root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface-1: #fcfcfb;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10); --wash: rgba(11,11,11,0.04);
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+  --ref-closed: #898781; --ref-open: #52514e;
+  --good: #006300; --bad: #d03b3b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface-1: #1a1a19;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --wash: rgba(255,255,255,0.05);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    --ref-closed: #898781; --ref-open: #c3c2b7;
+    --good: #0ca30c; --bad: #e66767;
+  }
+}
+:root[data-theme="dark"] .viz-root {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface-1: #1a1a19;
+  --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10); --wash: rgba(255,255,255,0.05);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  --ref-closed: #898781; --ref-open: #c3c2b7;
+  --good: #0ca30c; --bad: #e66767;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { background: var(--page); color: var(--text-primary); min-height: 100vh;
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; padding: 24px 32px 64px; }
+h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+h2 { font-size: 16px; font-weight: 600; margin: 32px 0 4px; }
+h3 { font-size: 14px; font-weight: 600; margin: 0 0 2px; }
+.sub { color: var(--text-secondary); margin: 0 0 12px; }
+.muted { color: var(--text-muted); }
+.controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin: 16px 0 8px;
+  position: sticky; top: 0; background: var(--page); padding: 10px 0; z-index: 5; border-bottom: 1px solid var(--grid); }
+.controls label { color: var(--text-secondary); display: flex; gap: 6px; align-items: center; }
+select, button { font: inherit; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 8px; }
+button { cursor: pointer; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 16px 16px 8px; }
+.grid-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 16px; max-width: 1400px; }
+.grid-mini { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.mini { cursor: pointer; padding: 10px 10px 4px; }
+.mini:hover, .mini:focus-visible { outline: 2px solid var(--axis); }
+.mini.selected { outline: 2px solid var(--text-secondary); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 4px 0 12px; color: var(--text-secondary); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+svg text { font: 11px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--text-muted); font-variant-numeric: tabular-nums; }
+svg .lbl { fill: var(--text-secondary); font-size: 12px; }
+svg .lbl-strong { fill: var(--text-primary); font-size: 12px; font-weight: 600; }
+.tooltip { position: fixed; pointer-events: none; background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 20; display: none; min-width: 160px; }
+.tooltip .head { color: var(--text-secondary); margin-bottom: 4px; }
+.tooltip .row { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.tooltip .row b { font-weight: 600; min-width: 40px; font-variant-numeric: tabular-nums; }
+.tooltip .row .n { color: var(--text-muted); }
+table { border-collapse: collapse; font-variant-numeric: tabular-nums; margin: 8px 0 16px; }
+th, td { border-bottom: 1px solid var(--grid); padding: 4px 10px; text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--text-secondary); font-weight: 600; }
+details > summary { cursor: pointer; color: var(--text-secondary); margin: 8px 0; }
+.browser-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin: 8px 0 12px; }
+.sess { border: 1px solid var(--border); border-radius: 10px; background: var(--surface-1); margin: 0 0 10px; }
+.sess > summary { padding: 10px 14px; margin: 0; color: var(--text-primary); display: flex; gap: 14px; flex-wrap: wrap; }
+.sess .body { padding: 0 14px 12px; }
+.pill { border: 1px solid var(--border); border-radius: 999px; padding: 0 8px; color: var(--text-secondary); font-size: 12px; }
+.turn { border-left: 3px solid var(--grid); padding: 6px 10px; margin: 8px 0; }
+.turn.teacher { border-left-color: var(--s1); }
+.turn.student { border-left-color: var(--s2); }
+.turn.grader { border-left-color: var(--axis); }
+.turn .who { color: var(--text-secondary); font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+pre { white-space: pre-wrap; word-wrap: break-word; margin: 0; font: 12.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.notebook { background: var(--wash); border-radius: 8px; padding: 10px; max-height: 420px; overflow: auto; }
+.empty { color: var(--text-muted); padding: 24px 0; }
+</style>
+</head>
+<body>
+<div class="viz-root" id="root">
+  <h1>teachlab report</h1>
+  <p class="sub" id="runMeta"></p>
+  <div class="controls">
+    <label>Run <select id="runSel"></select></label>
+    <label>Split <select id="splitSel"></select></label>
+    <label>Metric <select id="metricSel"></select></label>
+    <label><input type="checkbox" id="fullOnly" checked> Only k evaluated on every scenario</label>
+    <button id="themeBtn" type="button">Toggle dark mode</button>
+  </div>
+
+  <h2>Learning curves</h2>
+  <p class="sub">Solo ability after k study sessions (the student answers with only its memory). Mean over scenarios × session orders. Horizontal lines are conditions without sessions. Hollow points average fewer scenarios than the rest of the curve.</p>
+  <div class="legend" id="legend"></div>
+  <div class="grid-charts" id="mainCharts"></div>
+  <details><summary>Table view</summary><div id="tables"></div></details>
+
+  <div id="diagWrap"></div>
+
+  <h2>Per scenario</h2>
+  <p class="sub">Click a scenario to open its sessions below.</p>
+  <div id="miniCharts"></div>
+
+  <h2>Session browser</h2>
+  <div class="browser-head">
+    <label>Scenario <select id="scnSel"></select></label>
+    <label>Condition <select id="condSel"></select></label>
+    <label>Order <select id="orderSel"></select></label>
+  </div>
+  <div id="browser"></div>
+  <div class="tooltip" id="tip" role="status"></div>
+</div>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+"use strict";
+const RUNS = JSON.parse(document.getElementById("data").textContent);
+const $ = id => document.getElementById(id);
+const SVGNS = "http://www.w3.org/2000/svg";
+
+// Fixed color per condition (the entity, never its rank). Withdrawal arms (label "tutor@w5") keep the hue, dashed.
+const SLOT = { tutor: 1, self: 2, summary: 3, critique: 4, placebo: 5, teacher_note: 6, self_retry: 7, self_doc: 8 };
+const ONESHOT = new Set(["none", "doc", "summary"]);
+const NAMES = { none: "closed book (none)", doc: "open book (doc)" };
+const ORDER = ["tutor", "self", "summary", "critique", "placebo", "teacher_note", "self_retry", "self_doc", "doc", "none"];
+const baseCond = label => label.split("@")[0];
+const colorOf = label => {
+  const b = baseCond(label);
+  if (b === "none") return "var(--ref-closed)";
+  if (b === "doc") return "var(--ref-open)";
+  return `var(--s${SLOT[b] || 8})`;
+};
+const dashOf = label => label.includes("@") ? "6 4" : (ONESHOT.has(baseCond(label)) ? "4 4" : null);
+const nameOf = label => NAMES[label] || label;
+const sortLabels = ls => [...ls].sort((a, b) => (ORDER.indexOf(baseCond(a)) - ORDER.indexOf(baseCond(b))) || a.localeCompare(b));
+const fmt = v => v == null ? "–" : v.toFixed(2);
+
+let run = RUNS[0];
+const state = { split: "test", metric: "score", scn: null, label: null, order: 0 };
+
+function el(tag, attrs = {}, text) {
+  const e = tag.startsWith("svg:") ? document.createElementNS(SVGNS, tag.slice(4)) : document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) if (v != null) e.setAttribute(k, v);
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function value(ev, split, metric) {
+  const e = ev && ev[split];
+  if (!e) return null;
+  if (metric === "score" || metric === "passed") return e[metric];
+  return e.bt && e.bt[metric] != null ? e.bt[metric] : null;
+}
+
+// ---- aggregation -------------------------------------------------------------------------------
+function aggregate(records) {
+  // -> {label: {k: {v, n}}}
+  const acc = {};
+  for (const r of records) {
+    const v = value(r.ev, state.split, state.metric);
+    if (v == null) continue;
+    const a = ((acc[r.label] ||= {})[r.k] ||= { sum: 0, n: 0 });
+    a.sum += v; a.n += 1;
+  }
+  const out = {};
+  for (const [label, ks] of Object.entries(acc)) {
+    out[label] = {};
+    const maxN = Math.max(...Object.values(ks).map(a => a.n));
+    for (const [k, a] of Object.entries(ks)) {
+      if ($("fullOnly").checked && a.n < maxN && !ONESHOT.has(baseCond(label))) continue;
+      out[label][+k] = { v: a.sum / a.n, n: a.n, maxN };
+    }
+  }
+  return out;
+}
+
+// ---- chart -------------------------------------------------------------------------------------
+const tip = $("tip");
+function showTip(evt, head, rows) {
+  tip.replaceChildren(el("div", { class: "head" }, head));
+  for (const r of rows) {
+    const row = el("div", { class: "row" });
+    const key = el("svg:svg", { width: 16, height: 8 });
+    key.appendChild(el("svg:line", { x1: 0, x2: 16, y1: 4, y2: 4, stroke: r.color, "stroke-width": 2,
+                                      "stroke-dasharray": r.dash }));
+    row.append(key, el("b", {}, fmt(r.v)), el("span", {}, r.name));
+    if (r.n != null) row.append(el("span", { class: "n" }, `n=${r.n}`));
+    tip.appendChild(row);
+  }
+  tip.style.display = "block";
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = evt.clientX + 14, y = evt.clientY + 14;
+  if (x + w > innerWidth - 8) x = evt.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = evt.clientY - h - 14;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+const hideTip = () => { tip.style.display = "none"; };
+
+function lineChart(container, agg, { mini = false, title = "" } = {}) {
+  const labels = sortLabels(Object.keys(agg));
+  const curves = labels.filter(l => !ONESHOT.has(baseCond(l)));
+  const refs = labels.filter(l => ONESHOT.has(baseCond(l)) && agg[l][0]);
+  const ks = [...new Set(curves.flatMap(l => Object.keys(agg[l]).map(Number)))].sort((a, b) => a - b);
+  const W = Math.max(220, container.clientWidth - (mini ? 20 : 32));
+  const H = mini ? 150 : 300;
+  const m = mini ? { t: 8, r: 10, b: 20, l: 30 } : { t: 12, r: 150, b: 30, l: 40 };
+  const svg = el("svg:svg", { width: W, height: H, role: "img", "aria-label": title });
+  if (!ks.length && !refs.length) {
+    container.appendChild(el("div", { class: "empty" }, "No data for this split / metric."));
+    return;
+  }
+  const kmax = Math.max(1, ...ks), kmin = Math.min(0, ...ks);
+  const x = k => m.l + (k - kmin) / (kmax - kmin) * (W - m.l - m.r);
+  const y = v => m.t + (1 - v) * (H - m.t - m.b);
+  // grid + axes (hairline, solid, recessive)
+  for (const t of mini ? [0, 0.5, 1] : [0, 0.25, 0.5, 0.75, 1]) {
+    svg.appendChild(el("svg:line", { x1: m.l, x2: W - m.r, y1: y(t), y2: y(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }));
+    svg.appendChild(el("svg:text", { x: m.l - 6, y: y(t) + 4, "text-anchor": "end" }, t.toFixed(t === 0 || t === 1 ? 0 : 2)));
+  }
+  for (const k of ks) svg.appendChild(el("svg:text", { x: x(k), y: H - m.b + 14, "text-anchor": "middle" }, k));
+  if (!mini) svg.appendChild(el("svg:text", { x: W - m.r, y: H - 2, "text-anchor": "end" }, "session k"));
+  // reference lines (conditions without sessions)
+  for (const l of refs) {
+    const v = agg[l][0].v;
+    svg.appendChild(el("svg:line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: colorOf(l), "stroke-width": baseCond(l) === "summary" ? 2 : 1.5,
+                                      "stroke-dasharray": dashOf(l) }));
+  }
+  // curves
+  const ends = [];
+  for (const l of curves) {
+    const pts = Object.entries(agg[l]).map(([k, a]) => ({ k: +k, ...a })).sort((a, b) => a.k - b.k);
+    if (!pts.length) continue;
+    const d = pts.map((p, i) => `${i ? "L" : "M"}${x(p.k).toFixed(1)},${y(p.v).toFixed(1)}`).join("");
+    svg.appendChild(el("svg:path", { d, fill: "none", stroke: colorOf(l), "stroke-width": 2, "stroke-linejoin": "round",
+                                      "stroke-linecap": "round", "stroke-dasharray": dashOf(l) }));
+    for (const p of pts) {
+      const partial = p.n < p.maxN;
+      svg.appendChild(el("svg:circle", { cx: x(p.k), cy: y(p.v), r: mini ? 3 : 4, fill: partial ? "var(--surface-1)" : colorOf(l),
+                                          stroke: partial ? colorOf(l) : "var(--surface-1)", "stroke-width": 2 }));
+    }
+    const last = pts[pts.length - 1];
+    ends.push({ l, x: x(last.k), y: y(last.v), v: last.v });
+  }
+  // direct end labels (+ reference labels) in the right gutter, with leader lines when nudged
+  if (!mini) {
+    const items = ends.map(e => ({ ...e, text: `${nameOf(e.l)} ${fmt(e.v)}` }))
+      .concat(refs.map(l => ({ l, x: W - m.r, y: y(agg[l][0].v), v: agg[l][0].v, text: `${nameOf(l)} ${fmt(agg[l][0].v)}` })))
+      .sort((a, b) => a.y - b.y);
+    const top = m.t + 4, bottom = H - m.b + 10;
+    let prev = top - 14;
+    for (const it of items) { it.ly = Math.max(it.y, prev + 14); prev = it.ly; }
+    let next = bottom + 14;
+    for (const it of [...items].reverse()) { it.ly = Math.min(it.ly, next - 14); next = it.ly; }
+    for (const it of items) {
+      const lx = W - m.r + 10;
+      svg.appendChild(el("svg:line", { x1: it.x + 5, x2: lx - 2, y1: it.y, y2: it.ly, stroke: "var(--axis)", "stroke-width": 1 }));
+      svg.appendChild(el("svg:text", { x: lx, y: it.ly + 4, class: "lbl" }, it.text));
+    }
+  }
+  // hover: crosshair snapping to the nearest evaluated k; one tooltip lists every series
+  const cross = el("svg:line", { y1: m.t, y2: H - m.b, stroke: "var(--axis)", "stroke-width": 1, visibility: "hidden" });
+  svg.appendChild(cross);
+  const hit = el("svg:rect", { x: m.l, y: 0, width: W - m.l - m.r, height: H, fill: "transparent", tabindex: 0 });
+  const at = k => {
+    cross.setAttribute("x1", x(k)); cross.setAttribute("x2", x(k)); cross.setAttribute("visibility", "visible");
+    const rows = curves.filter(l => agg[l][k]).map(l => ({ name: nameOf(l), v: agg[l][k].v, n: agg[l][k].n, color: colorOf(l), dash: dashOf(l) }))
+      .concat(refs.map(l => ({ name: nameOf(l), v: agg[l][0].v, n: agg[l][0].n, color: colorOf(l), dash: dashOf(l) })))
+      .sort((a, b) => b.v - a.v);
+    return rows;
+  };
+  const xs = ks.length ? ks : [0];
+  hit.addEventListener("pointermove", evt => {
+    const px = evt.offsetX;
+    const k = xs.reduce((b, c) => Math.abs(x(c) - px) < Math.abs(x(b) - px) ? c : b, xs[0]);
+    showTip(evt, `${title ? title + " · " : ""}k = ${k}`, at(k));
+  });
+  hit.addEventListener("pointerleave", () => { hideTip(); cross.setAttribute("visibility", "hidden"); });
+  let fi = 0;
+  hit.addEventListener("keydown", evt => {
+    if (evt.key !== "ArrowRight" && evt.key !== "ArrowLeft") return;
+    fi = Math.max(0, Math.min(xs.length - 1, fi + (evt.key === "ArrowRight" ? 1 : -1)));
+    const r = hit.getBoundingClientRect();
+    showTip({ clientX: r.left + x(xs[fi]) - m.l, clientY: r.top + 20 }, `k = ${xs[fi]}`, at(xs[fi]));
+  });
+  hit.addEventListener("blur", () => { hideTip(); cross.setAttribute("visibility", "hidden"); });
+  svg.appendChild(hit);
+  container.appendChild(svg);
+}
+
+// ---- sections ----------------------------------------------------------------------------------
+function legend(labels) {
+  const box = $("legend");
+  box.replaceChildren();
+  for (const l of sortLabels(labels)) {
+    const s = el("span");
+    const key = el("svg:svg", { width: 20, height: 10 });
+    key.appendChild(el("svg:line", { x1: 0, x2: 20, y1: 5, y2: 5, stroke: colorOf(l), "stroke-width": 2, "stroke-dasharray": dashOf(l) }));
+    s.append(key, document.createTextNode(nameOf(l)));
+    box.appendChild(s);
+  }
+}
+
+function renderMain() {
+  const box = $("mainCharts");
+  box.replaceChildren();
+  const tables = $("tables");
+  tables.replaceChildren();
+  const sources = [...new Set(run.curves.map(r => r.src))].sort();
+  const allLabels = new Set();
+  const draws = [];
+  for (const src of sources) {
+    const recs = run.curves.filter(r => r.src === src);
+    const agg = aggregate(recs);
+    Object.keys(agg).forEach(l => allLabels.add(l));
+    const nScn = new Set(recs.map(r => r.s)).size;
+    const card = el("div", { class: "card" });
+    card.append(el("h3", {}, src), el("div", { class: "muted" }, `${nScn} scenarios · ${state.split} · ${state.metric}`));
+    box.appendChild(card);
+    draws.push(() => lineChart(card, agg, { title: src }));
+    // table view
+    const ks = [...new Set(Object.values(agg).flatMap(a => Object.keys(a).map(Number)))].sort((a, b) => a - b);
+    tables.appendChild(el("h3", {}, `${src} — ${state.split} ${state.metric}`));
+    const t = el("table");
+    const hr = el("tr");
+    hr.append(el("th", {}, "condition"), ...ks.map(k => el("th", {}, `k=${k}`)));
+    t.appendChild(hr);
+    for (const l of sortLabels(Object.keys(agg))) {
+      const tr = el("tr");
+      tr.append(el("td", {}, nameOf(l)), ...ks.map(k => el("td", {}, agg[l][k] ? `${fmt(agg[l][k].v)} (${agg[l][k].n})` : "")));
+      t.appendChild(tr);
+    }
+    tables.appendChild(t);
+  }
+  draws.forEach(d => d());
+  legend(allLabels);
+}
+
+function renderDiagnose() {
+  const wrap = $("diagWrap");
+  wrap.replaceChildren();
+  if (!run.diagnose.length) return;
+  wrap.append(el("h2", {}, "Memory diagnostic"),
+    el("p", { class: "sub" }, "Same tutor sessions, memory rebuilt differently, re-tested at the last k. notebook = the run's own student-written notebook; transcript = the full session record; teacher_nb = the teacher's compression of the records (without the document)."));
+  const kinds = ["notebook", ...new Set(run.diagnose.map(d => d.memory))];
+  const own = {};
+  for (const r of run.curves) if (r.label === "tutor" && r.o === 0 && (!own[r.s] || r.k > own[r.s].k) && r.ev[state.split]) own[r.s] = r;
+  const t = el("table");
+  const hr = el("tr");
+  hr.append(el("th", {}, "scenario"), ...kinds.map(k => el("th", {}, k)));
+  t.appendChild(hr);
+  const sums = {};
+  for (const s of [...new Set(run.diagnose.map(d => d.s))].sort()) {
+    const tr = el("tr");
+    tr.appendChild(el("td", {}, s));
+    for (const k of kinds) {
+      const v = k === "notebook" ? (own[s] ? value(own[s].ev, state.split, state.metric) : null)
+                                 : value((run.diagnose.find(d => d.s === s && d.memory === k) || {}).ev, state.split, state.metric);
+      if (v != null) (sums[k] ||= []).push(v);
+      tr.appendChild(el("td", {}, fmt(v)));
+    }
+    t.appendChild(tr);
+  }
+  const mr = el("tr");
+  mr.appendChild(el("td", {}, "mean"));
+  for (const k of kinds) mr.appendChild(el("th", {}, sums[k] ? fmt(sums[k].reduce((a, b) => a + b, 0) / sums[k].length) : "–"));
+  t.appendChild(mr);
+  wrap.append(el("div", { class: "muted" }, `${state.split} · ${state.metric}`), t);
+}
+
+function renderMini() {
+  const box = $("miniCharts");
+  box.replaceChildren();
+  const sources = [...new Set(run.curves.map(r => r.src))].sort();
+  const draws = [];
+  for (const src of sources) {
+    box.appendChild(el("h3", { style: "margin-top:12px" }, src));
+    const grid = el("div", { class: "grid-mini" });
+    box.appendChild(grid);
+    const scns = [...new Set(run.curves.filter(r => r.src === src).map(r => r.s))].sort();
+    for (const s of scns) {
+      const card = el("div", { class: "card mini" + (s === state.scn ? " selected" : ""), tabindex: 0, role: "button" });
+      card.appendChild(el("div", { class: "muted" }, s));
+      grid.appendChild(card);
+      const agg = aggregate(run.curves.filter(r => r.s === s));
+      draws.push(() => lineChart(card, agg, { mini: true, title: s }));
+      const pick = () => { state.scn = s; fillBrowserSelects(); renderMini(); renderBrowser(); $("browser").scrollIntoView({ behavior: "smooth" }); };
+      card.addEventListener("click", pick);
+      card.addEventListener("keydown", e => { if (e.key === "Enter") pick(); });
+    }
+  }
+  draws.forEach(d => d());
+}
+
+// ---- session browser ---------------------------------------------------------------------------
+function fillSelect(sel, values, current, label = v => v) {
+  sel.replaceChildren(...values.map(v => { const o = el("option", { value: v }, label(v)); if (String(v) === String(current)) o.selected = true; return o; }));
+}
+
+function fillBrowserSelects() {
+  const keys = Object.keys(run.sessions).map(k => k.split("|"));
+  const scns = [...new Set(keys.map(k => k[0]))].sort();
+  if (!scns.includes(state.scn)) state.scn = scns[0];
+  fillSelect($("scnSel"), scns, state.scn);
+  const labels = sortLabels([...new Set(keys.filter(k => k[0] === state.scn).map(k => k[1]))]);
+  if (!labels.includes(state.label)) state.label = labels.find(l => baseCond(l) === "tutor") || labels[0];
+  fillSelect($("condSel"), labels, state.label, nameOf);
+  const orders = [...new Set(keys.filter(k => k[0] === state.scn && k[1] === state.label).map(k => +k[2]))].sort();
+  if (!orders.includes(state.order)) state.order = orders[0];
+  fillSelect($("orderSel"), orders, state.order);
+}
+
+function turn(cls, who, text) {
+  const d = el("div", { class: "turn " + cls });
+  d.append(el("div", { class: "who" }, who), el("pre", {}, text || ""));
+  return d;
+}
+
+function evalBlock(ev) {
+  const frag = document.createDocumentFragment();
+  for (const [split, e] of Object.entries(ev || {})) {
+    const det = el("details");
+    const extra = Object.entries(e.bt || {}).map(([t, v]) => `${t} ${fmt(v)}`).join(" · ");
+    det.appendChild(el("summary", {}, `Solo test on ${split}: score ${fmt(e.score)} · all-correct ${fmt(e.passed)}${extra ? " · " + extra : ""} (${e.items.length} items)`));
+    for (const it of e.items) {
+      const d2 = el("details", { style: "margin-left:16px" });
+      const bt = Object.entries(it.bt || {}).map(([t, v]) => `${t} ${fmt(v)}`).join(" · ");
+      d2.appendChild(el("summary", {}, `${it.id} — ${fmt(it.score)}${it.scores && it.scores.length > 1 ? " [" + it.scores.map(fmt).join(", ") + "]" : ""}${bt ? " · " + bt : ""}`));
+      d2.appendChild(turn("student", "Student's answer (first sample, with only its memory)", it.output));
+      det.appendChild(d2);
+    }
+    frag.appendChild(det);
+  }
+  return frag;
+}
+
+function renderBrowser() {
+  const box = $("browser");
+  box.replaceChildren();
+  const entries = run.sessions[`${state.scn}|${state.label}|${state.order}`] || [];
+  if (!entries.length) { box.appendChild(el("div", { class: "empty" }, "No records.")); return; }
+  for (const e of entries) {
+    const det = el("details", { class: "sess" });
+    const sum = el("summary");
+    sum.appendChild(el("b", {}, e.k === 0 ? (ONESHOT.has(baseCond(state.label)) ? "No sessions" : "k = 0 (before any session)") : `Session ${e.k}`));
+    if (e.item) sum.appendChild(el("span", { class: "pill" }, e.item));
+    if (e.session && e.session.attempts.length) sum.appendChild(el("span", { class: "pill" }, `attempt ${e.session.attempts.map(a => fmt(a.score)).join(" → ")}`));
+    if (e.log.teacher_msgs) sum.appendChild(el("span", { class: "pill" }, `${e.log.teacher_msgs} teacher msgs · ${e.log.teacher_words} words`));
+    if (e.log.teacher_present === false && baseCond(state.label) !== "self") sum.appendChild(el("span", { class: "pill" }, "teacher withdrawn"));
+    if (e.violations) sum.appendChild(el("span", { class: "pill" }, `${e.violations} rule violations`));
+    sum.appendChild(el("span", { class: "pill" }, `memory ${e.memWords ?? 0} words`));
+    for (const [split, ev] of Object.entries(e.ev || {})) sum.appendChild(el("span", { class: "pill" }, `${split} ${fmt(ev.score)}`));
+    det.appendChild(sum);
+    const body = el("div", { class: "body" });
+    if (e.session) {
+      body.appendChild(turn("grader", "Example problem", e.session.problem));
+      for (const [who, text] of e.session.dialogue) body.appendChild(turn(who, who === "teacher" ? "Teacher" : "Student", text));
+      e.session.attempts.forEach((a, i) => {
+        body.appendChild(turn("student", e.session.dialogue.length ? "Student — final attempt" : `Student — attempt ${i + 1}`, a.response));
+        body.appendChild(turn("grader", `Grader — score ${fmt(a.score)}`, a.feedback));
+      });
+      if (e.session.critique) body.appendChild(turn("teacher", "Teacher — critique", e.session.critique));
+    }
+    if (e.notebook != null) {
+      body.appendChild(el("div", { class: "who muted", style: "margin-top:10px" },
+        e.k === 0 && !e.notebook ? "Memory: empty" : `Memory after this ${e.k ? "session" : "step"} (${e.memWords} words${e.log.notebook_truncated ? ", truncated to budget" : ""})`));
+      if (e.notebook) body.appendChild(el("pre", { class: "notebook" }, e.notebook));
+    }
+    body.appendChild(evalBlock(e.ev));
+    det.appendChild(body);
+    box.appendChild(det);
+  }
+}
+
+// ---- controls ----------------------------------------------------------------------------------
+function fillControls() {
+  const m = run.meta || {};
+  $("runMeta").textContent = `${run.name} · student ${m.student} · teacher ${m.teacher} · judge ${m.judge} · memory ${m.memory_policy} (B = ${m.budget} words)`;
+  const splits = [...new Set(run.curves.flatMap(r => Object.keys(r.ev)))].sort().reverse();
+  if (!splits.includes(state.split)) state.split = splits[0];
+  fillSelect($("splitSel"), splits, state.split);
+  const types = [...new Set(run.curves.flatMap(r => Object.values(r.ev).flatMap(e => Object.keys(e.bt || {}))))].sort();
+  const metrics = ["score", "passed", ...types];
+  if (!metrics.includes(state.metric)) state.metric = "score";
+  fillSelect($("metricSel"), metrics, state.metric, v => ({ score: "score (mean)", passed: "all-correct rate" }[v] || `${v} rubrics`));
+}
+
+function renderAll() { fillControls(); renderMain(); renderDiagnose(); renderMini(); fillBrowserSelects(); renderBrowser(); }
+
+fillSelect($("runSel"), RUNS.map((r, i) => i), 0, i => RUNS[i].name);
+$("runSel").addEventListener("change", e => { run = RUNS[+e.target.value]; state.scn = null; renderAll(); });
+$("splitSel").addEventListener("change", e => { state.split = e.target.value; renderMain(); renderDiagnose(); renderMini(); });
+$("metricSel").addEventListener("change", e => { state.metric = e.target.value; renderMain(); renderDiagnose(); renderMini(); });
+$("fullOnly").addEventListener("change", () => { renderMain(); renderMini(); });
+$("scnSel").addEventListener("change", e => { state.scn = e.target.value; fillBrowserSelects(); renderMini(); renderBrowser(); });
+$("condSel").addEventListener("change", e => { state.label = e.target.value; fillBrowserSelects(); renderBrowser(); });
+$("orderSel").addEventListener("change", e => { state.order = +e.target.value; renderBrowser(); });
+$("themeBtn").addEventListener("click", () => {
+  const dark = document.documentElement.dataset.theme === "dark" ||
+    (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+  document.documentElement.dataset.theme = dark ? "light" : "dark";
+});
+let rt;
+addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { renderMain(); renderMini(); }, 150); });
+renderAll();
+</script>
+</body>
+</html>
