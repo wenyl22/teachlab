@@ -12,6 +12,7 @@ Usage:
 
 import argparse
 import os
+import time
 import random
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -147,13 +148,25 @@ def main():
                     jobs.append((s, cond, label, order, out_path, have))
     print(f"{len(scenarios)} scenarios, {len(jobs)} scenario x condition x order jobs to run or resume -> {run_dir}")
 
-    with ThreadPoolExecutor(max_workers=args.workers) as ex:
-        futures = {ex.submit(run_job, ctx, *job): (job[0]["id"], job[2], job[3]) for job in jobs}
-        for f in tqdm(as_completed(futures), total=len(futures)):
-            try:
-                f.result()
-            except Exception as e:
-                print(f"   ❌ {futures[f]} failed: {str(e)[:300]}")
+    try:
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            futures = {ex.submit(run_job, ctx, *job): (job[0]["id"], job[2], job[3]) for job in jobs}
+            for f in tqdm(as_completed(futures), total=len(futures)):
+                try:
+                    f.result()
+                except Exception as e:
+                    print(f"   ❌ {futures[f]} failed: {str(e)[:300]}")
+    finally:
+        # Token usage of this invocation, one line per role; a resumed run appends another line.
+        usage = {role: {"model": m.name, **m.usage} for role, m in
+                 (("student", ctx.student), ("teacher", ctx.teacher), ("judge", ctx.judge))}
+        append_jsonl({"time": time.strftime("%Y-%m-%d %H:%M:%S"), "conditions": conds, "usage": usage},
+                     os.path.join(run_dir, "usage.jsonl"))
+        for role, u in usage.items():
+            if u["calls"]:
+                print(f"   {role} {u['model']}: {u['calls']} calls, {u['prompt_tokens']} prompt "
+                      f"({u['cached_tokens']} cached), {u['completion_tokens']} completion "
+                      f"({u['reasoning_tokens']} reasoning) tokens")
 
 
 if __name__ == "__main__":

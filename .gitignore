@@ -10,3 +10,6 @@ teachlab/scenarios/
 teachlab/outputs/
 *.log
 _*
+pres
+plots
+*.sh

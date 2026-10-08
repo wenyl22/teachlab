@@ -20,8 +20,9 @@ import warnings
 
 from .vendor.sebench.EqualityChecker import EqulityChecker
 
-# EqulityChecker eval()s printed outputs; strings like "[1 2](3)" make Python emit SyntaxWarnings from "<string>".
-warnings.filterwarnings("ignore", category=SyntaxWarning, module="<string>")
+# EqulityChecker eval()s and ast.literal_eval()s printed outputs; strings like "[1 2](3)" or "1if" make Python emit
+# SyntaxWarnings from "<string>" (eval) or "<unknown>" (literal_eval).
+warnings.filterwarnings("ignore", category=SyntaxWarning, module="<(string|unknown)>")
 from .vendor.sebench.ast_zwc_checker import ASTSourceValidator
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -361,10 +362,30 @@ def feedback_exec(spec, result, max_cases=3):
 
 # --- exact (final answer match) ---------------------------------------------------------------
 
+def _last_boxed(text):
+    """Content of the last \\boxed{...}, with nested braces (e.g. \\boxed{\\text{ka-te}})."""
+    start = text.rfind("\\boxed{")
+    if start < 0:
+        return None
+    i = start + len("\\boxed{")
+    depth = 1
+    for j in range(i, len(text)):
+        depth += {"{": 1, "}": -1}.get(text[j], 0)
+        if depth == 0:
+            return text[i:j]
+    return text[i:].split("\n")[0].rstrip("}")  # unclosed box: the rest of its line
+
+
 def extract_answer(response):
-    boxed = re.findall(r"\\boxed\{([^{}]*)\}", response or "")
-    if boxed:
-        return boxed[-1].strip()
+    boxed = _last_boxed(response or "")
+    if boxed is not None:
+        # Unwrap LaTeX text commands models put inside the box: \text{ka-te}, ka\text{-}te, \mathrm{...}
+        text_cmd = re.compile(r"\\(?:text|mathrm|textrm|texttt|mathtt|textbf|mathbf)\{([^{}]*)\}")
+        while text_cmd.search(boxed):
+            boxed = text_cmd.sub(r"\1", boxed)
+        boxed = re.sub(r"\\(?:text|mathrm|textrm|texttt|mathtt|textbf|mathbf)\{", "", boxed)  # left unclosed
+        boxed = re.sub(r"(\\[)\]]|[.\s$])+$", "", boxed)  # a math delimiter or period caught inside the box
+        return boxed.replace("\\-", "-").strip().strip("$").strip()
     lines = [l for l in (response or "").strip().splitlines() if l.strip()]
     if not lines:
         return ""

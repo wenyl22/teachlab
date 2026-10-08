@@ -10,6 +10,7 @@ Only the memory differs; the sessions are identical.
 
 Usage:
     python -m teachlab.diagnose_memory teachlab/outputs/clbench_core/tutor.jsonl --scenarios teachlab/scenarios/clbench.jsonl
+    (add --ks 1,2,4,6,8,10 to rebuild the memory after each of those sessions, for a learning curve)
 """
 
 import argparse
@@ -35,6 +36,8 @@ def main():
     p.add_argument("run_file", help="A finished run's condition file, e.g. teachlab/outputs/<run>/tutor.jsonl")
     p.add_argument("--scenarios", nargs="+", required=True)
     p.add_argument("--memories", default="transcript,teacher_nb")
+    p.add_argument("--ks", default=None,
+                   help="Comma-separated k: rebuild the memory from the first k sessions only (default: all sessions)")
     p.add_argument("--out", default=None, help="Default: <run dir>/diagnose_<condition>.jsonl")
     add_model_args(p, "student", "gpt-5-mini")
     add_model_args(p, "teacher", "gpt-5.5")
@@ -53,12 +56,12 @@ def main():
             runs[r["scenario"]].append(r)
     out = args.out or os.path.join(os.path.dirname(args.run_file),
                                    f"diagnose_{os.path.splitext(os.path.basename(args.run_file))[0]}.jsonl")
-    done = {(r["scenario"], r["memory"]) for r in load_jsonl(out)}
+    done = {(r["scenario"], r["memory"], r["k"]) for r in load_jsonl(out)}
     ctx = Ctx(model_from_args(args, "student"), model_from_args(args, "teacher"), model_from_args(args, "judge"), args)
 
-    def job(sid, kind):
+    def job(sid, kind, k):
         scn, recs = scenarios[sid], sorted(runs[sid], key=lambda r: r["k"])
-        sessions = [r["session"] for r in recs if r["k"] > 0]
+        sessions = [r["session"] for r in recs if 0 < r["k"] <= k]
         if kind == "transcript":
             state = {"transcript": sessions}
         else:
@@ -68,10 +71,13 @@ def main():
             note, _ = enforce_budget(ctx.teacher, msgs, ctx.teacher.chat(msgs), args.budget)
             state = {"notebook": note}
         ev = {sp: evaluate(ctx, scn, state, sp) for sp in args.eval_splits.split(",")}
-        append_jsonl({"scenario": sid, "memory": kind, "k": recs[-1]["k"], "memory_words": words(memory_text(state)),
+        append_jsonl({"scenario": sid, "memory": kind, "k": k, "memory_words": words(memory_text(state)),
                       "state": state, "eval": {k: v for k, v in ev.items() if v}}, out)
 
-    jobs = [(sid, kind) for sid in runs for kind in args.memories.split(",") if (sid, kind) not in done]
+    last_k = {sid: max(r["k"] for r in recs) for sid, recs in runs.items()}
+    jobs = [(sid, kind, k) for sid in runs for kind in args.memories.split(",")
+            for k in ([int(x) for x in args.ks.split(",")] if args.ks else [last_k[sid]])
+            if k <= last_k[sid] and (sid, kind, k) not in done]
     print(f"{len(jobs)} jobs -> {out}")
     with ThreadPoolExecutor(max_workers=args.workers) as ex:
         for f in [ex.submit(job, *j) for j in jobs]:
@@ -87,7 +93,8 @@ def main():
         if last.get("eval"):
             rows[sid]["notebook"] = (last["eval"]["test"], last["memory_words"])
     for r in load_jsonl(out):
-        rows[r["scenario"]][r["memory"]] = (r["eval"]["test"], r["memory_words"])
+        if r["k"] == last_k.get(r["scenario"]):  # the table compares final memories; per-k results are in the file
+            rows[r["scenario"]][r["memory"]] = (r["eval"]["test"], r["memory_words"])
     kinds = ["notebook"] + args.memories.split(",")
     for metric in ("doc", "instruction", "score"):
         print(f"\n## test {metric}\n\n| scenario | " + " | ".join(kinds) + " |\n|---|" + "---|" * len(kinds))

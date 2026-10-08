@@ -88,7 +88,12 @@ For example, in "x {w1} y {w2} z", {"the " + w1 + " is applied first" if self.op
 Results are always written as {name} numerals."""
 
 
-def make_items(world, rng, n, length, split, sid, max_val):
+# Models whose reasoning is hidden (closed reasoning models) would otherwise answer with a bare \boxed{}, so the
+# session record - all the student keeps to write its notebook from - shows no trace of how the answer was found.
+SHOW_WORK = "Show your work step by step: write out each step of the calculation with its intermediate result. "
+
+
+def make_items(world, rng, n, length, split, sid, max_val, show_work=False):
     items = []
     for i in range(n):
         nums = [rng.randint(0, max_val) for _ in range(length + 1)]
@@ -97,7 +102,8 @@ def make_items(world, rng, n, length, split, sid, max_val):
         items.append({
             "id": f"{sid}/{split}{i}", "split": split,
             "messages": [{"role": "user", "content": f"Evaluate the expression:\n\n{expr}\n\n"
-                                                     "Write the result as a numeral of this world, inside \\boxed{}."}],
+                                                     + (SHOW_WORK if show_work else "")
+                                                     + "Write the result as a numeral of this world, inside \\boxed{}."}],
             "grader": {"type": "exact", "answer": world.numeral(world.evaluate(nums, ops))},
         })
     return items
@@ -113,20 +119,23 @@ def main():
     p.add_argument("--probe", type=int, default=10)
     p.add_argument("--test", type=int, default=30)
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--show-work", action="store_true",
+                   help="Ask for the calculation steps in the answer, not only the boxed result (see SHOW_WORK)")
     p.add_argument("--out", default=None)
     args = p.parse_args()
     rng = random.Random(args.seed)
 
-    variant = f"o{args.ops}l{args.length}{f'_s{args.seed}' if args.seed else ''}"
+    variant = f"o{args.ops}l{args.length}{'w' if args.show_work else ''}{f'_s{args.seed}' if args.seed else ''}"
     scenarios = []
     for w in range(args.worlds):
         world, name = World(rng, args.ops), rng.choice(["Velm", "Oruth", "Kesh", "Tamboa", "Ilvar", "Prenn"])
         sid = f"rule_world/{variant}/w{w:02d}"
         items = [it for split, n in (("stream", args.stream), ("probe", args.probe), ("test", args.test))
-                 for it in make_items(world, rng, n, args.length, split, sid, args.max_val)]
+                 for it in make_items(world, rng, n, args.length, split, sid, args.max_val, args.show_work)]
         scenarios.append({
             "id": sid, "source": "rule_world",
-            "meta": {"base": world.base, "ops": args.ops, "length": args.length, "seed": args.seed},
+            "meta": {"base": world.base, "ops": args.ops, "length": args.length, "seed": args.seed,
+                     "show_work": args.show_work},
             "knowledge": world.document(name),
             "student_system": f"You are a careful assistant who does arithmetic in the world of {name}.",
             "items": items,

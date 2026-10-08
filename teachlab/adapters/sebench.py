@@ -32,8 +32,16 @@ DATA = "data/sebench"
 VERIFIED = os.path.join(DATA, "verified.json")
 FILES = ("train", "single_test", "multiple_test")
 
-STUDENT_SYSTEM = ("You are a Python programmer. Your runtime has an unfamiliar numerical library called zwc and "
-                  "NumPy is NOT installed, so every solution must be built on zwc functions.")
+# Runtime facts the API docs do not state. Without them a solver with the docs open still fails about half of
+# its wrong answers on these (NumPy habits such as abs(arr), m1 & m2, arr.sum(), zwc.pi), which only execution
+# feedback can reveal. Verified against data/sebench/zwc (ZWCArray in zwc/__init__.py).
+STUDENT_SYSTEM = """You are a Python programmer. Your runtime has an unfamiliar numerical library called zwc and NumPy is NOT installed, so every solution must be built on zwc functions.
+
+Runtime notes on zwc arrays (they hold for every zwc function):
+- zwc functions accept Python numbers, lists and nested lists, and return a ZWCArray (or a plain Python number for a single value). A solution may return a ZWCArray directly.
+- A ZWCArray supports only: indexing and slicing, including boolean masks (a[a > 0]); item assignment; len() and iteration; the operators + - * / ** with numbers or arrays; the comparisons == != < <= > >=; and the attributes .shape, .dtype, .size, .ndim and .T. Indexing one element gives a plain Python number.
+- Nothing else exists on a ZWCArray: no methods such as .sum(), .mean(), .reshape(), .astype() or .tolist() (use the zwc function for the operation, or plain Python, e.g. [float(x) for x in a]); no unary minus or abs() on a whole array (write 0 - a, or use the zwc function); no & | ~ or @ (for masks, m1 * m2 means "and", (m1 + m2) > 0 means "or", m == False means "not").
+- The zwc module has no constants (no zwc.pi, zwc.inf, zwc.nan, zwc.newaxis): use math.pi, float("inf"), float("nan"). The Python standard library is available."""
 
 TASK_PROMPT = """### Problem
 {query}
@@ -143,7 +151,7 @@ def grow_courses(multi, n_funcs, n_courses, rng):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--funcs", type=int, default=8, help="Functions per course")
-    p.add_argument("--courses", type=int, default=20)
+    p.add_argument("--courses", type=int, default=10)
     p.add_argument("--probe-frac", type=float, default=0.2, help="Fraction of a course's train items held out as probe")
     p.add_argument("--min-stream", type=int, default=10)
     p.add_argument("--doc-scope", choices=["course", "library"], default="course",
