@@ -77,6 +77,22 @@ Full definitions are in [session.py](teachlab/session.py).
   - `--memory notebook`: the notebook is rewritten after every session, capped at `--budget` words (B);
   - `--memory transcript`: the full record of every session, unbounded.
 
+### Optimising the notebook with GEPA
+
+[gepa_notes.py](teachlab/gepa_notes.py) treats the student's notebook as a text to optimise with [GEPA](https://github.com/gepa-ai/gepa) (`pip install gepa`), one run per course:
+
+- **Train:** minibatches of stream items. The student attempts them with the current notebook. The teacher rewrites the notebook from the graded attempts and the private document (the `teacher_note` prompt, with several attempts instead of one session). A rewrite is kept only if it scores higher on the same minibatch.
+- **Validation:** GEPA selects candidates on probe scores. The teacher never sees probe problems. `--val-from-stream N` holds back the last N stream items instead, leaving probe and test untouched.
+- **Output:** a final probe/test evaluation, in `run.py`'s record format (`k = 0`). The record also includes every candidate, its parents and its validation score, plus a log of every teacher call.
+
+Budget: `--max-metric-calls` (student rollouts per course, default 300) and optionally `--max-rewrites` (teacher rewrites). Seeds: an empty notebook, or `--seed-from <run dir>` to start from that run's `summary` notes. Finished courses are skipped, and unfinished ones resume from their GEPA state.
+
+```bash
+python -m teachlab.gepa_notes --scenarios teachlab/scenarios/rule_world_o6l3.jsonl --out teachlab/outputs/gepa_rw \
+  --student qwen3-4b --student-url http://localhost:8101/v1 --teacher qwen3.8-27b --teacher-url http://localhost:8102/v1 \
+  --student-extra '{"chat_template_kwargs": {"enable_thinking": false}}' --teacher-extra '{"chat_template_kwargs": {"enable_thinking": false}}'
+```
+
 ## Running
 
 - Default models: student gpt-5-mini, teacher gpt-5.5, judge gpt-5.1.

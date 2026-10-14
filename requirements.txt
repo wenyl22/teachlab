@@ -1,5 +1,7 @@
 openai>=1.0.0
 python-dotenv
 tqdm
+# only for teachlab.gepa_notes (GEPA notebook optimisation)
+gepa
 # zwc declares numpy==2.3.0, and SE-Bench's sandbox (and so its ground truth) uses it
 numpy==2.3.0
