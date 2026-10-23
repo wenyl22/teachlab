@@ -27,8 +27,10 @@ and held-out items to measure the student's solo ability. One JSON object per li
 import json
 import os
 
+from .teachmix.graders import GRADERS as TEACHMIX_GRADERS
+
 SPLITS = ("stream", "probe", "test")
-GRADER_TYPES = ("rubric", "exec", "exact")
+GRADER_TYPES = ("rubric", "exec", "exact") + tuple(TEACHMIX_GRADERS)  # numeric, nba, choice, kor, pyexec, chrf, rg
 
 
 def validate(scenario):
