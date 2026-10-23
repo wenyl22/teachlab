@@ -2,9 +2,9 @@
 
 The text being optimised is the notebook the student answers with - the same memory as in every notebook condition.
 Per course:
-    trainset   stream items (teaching problems). GEPA minibatches: the student attempts them with the current
-               notebook, the teacher rewrites it from the graded attempts, and the rewrite is kept only if it scores
-               higher on the same minibatch.
+    trainset   stream items (teaching problems; only the first N with --train-items N). GEPA minibatches: the
+               student attempts them with the current notebook, the teacher rewrites it from the graded attempts, and
+               the rewrite is kept only if it scores higher on the same minibatch.
     valset     probe items (default) - GEPA selects candidates on these scores (only scores; the teacher never sees
                probe problems). With --val-from-stream N, the last N stream items are held back as the valset instead,
                so probe and test stay untouched, as in the other conditions.
@@ -129,8 +129,12 @@ def splits(scn, args):
     train = items(scn, "stream")
     if args.val_from_stream:
         n = min(args.val_from_stream, len(train) - 1)
-        return train[:-n], train[-n:]
-    return train, items(scn, "probe")
+        train, val = train[:-n], train[-n:]
+    else:
+        val = items(scn, "probe")
+    if args.train_items:  # e.g. 10 = the problems a 10-session teaching run sees
+        train = train[:args.train_items]
+    return train, val
 
 
 def run_course(ctx, scn, seed_text, args, label, out_path, log_path):
@@ -180,6 +184,8 @@ def main():
     p.add_argument("--minibatch", type=int, default=4, help="Teaching problems per GEPA minibatch")
     p.add_argument("--val-from-stream", type=int, default=0,
                    help="Hold back the last N stream items as GEPA's valset instead of the probe split")
+    p.add_argument("--train-items", type=int, default=0,
+                   help="Use only the first N (remaining) stream items as GEPA's trainset; the label gets _t<N>")
     p.add_argument("--budget", type=int, default=1500, help="Notebook limit B, in words")
     p.add_argument("--max-copy", type=float, default=0.25,
                    help="Max fraction of the notebook copied verbatim from the document (rewritten once if over)")
@@ -201,7 +207,8 @@ def main():
     if args.seed_from != "none":
         seeds = {r["scenario"]: r["state"]["notebook"] for r in load_jsonl(os.path.join(args.seed_from, "summary.jsonl"))}
     label = "gepa_" + ("empty" if args.seed_from == "none" else "summary") + \
-        (f"_r{args.max_rewrites}" if args.max_rewrites else "") + ("_sval" if args.val_from_stream else "")
+        (f"_r{args.max_rewrites}" if args.max_rewrites else "") + ("_sval" if args.val_from_stream else "") + \
+        (f"_t{args.train_items}" if args.train_items else "")
     os.makedirs(args.out, exist_ok=True)
     out_path = os.path.join(args.out, f"{label}.jsonl")
     log_path = os.path.join(args.out, f"proposals_{label}.jsonl")

@@ -29,6 +29,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ZWC_PATH = os.path.join(ROOT, "data", "sebench", "zwc")
 
 from .vendor.clbench.judge import judge_prompt  # CL-bench's own judge prompt, with the opener fix
+from .teachmix.graders import GRADERS as TEACHMIX_GRADERS  # numeric, nba, choice, kor, pyexec, chrf, rg
 
 
 # --- rubric (LLM judge) -----------------------------------------------------------------------
@@ -421,9 +422,13 @@ def grade(item, response, judge):
         return grade_exec(spec, response)
     if spec["type"] == "exact":
         return grade_exact(spec, response)
+    if spec["type"] in TEACHMIX_GRADERS:
+        return TEACHMIX_GRADERS[spec["type"]][0](spec, response)
     raise ValueError(spec["type"])
 
 
 def feedback(item, result):
     spec = item["grader"]
+    if spec["type"] in TEACHMIX_GRADERS:
+        return TEACHMIX_GRADERS[spec["type"]][1](spec, result)
     return {"rubric": feedback_rubric, "exec": feedback_exec, "exact": feedback_exact}[spec["type"]](spec, result)

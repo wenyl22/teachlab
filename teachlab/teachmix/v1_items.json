@@ -1,0 +1,2858 @@
+{
+ "benchmark": "teachmix_v1",
+ "courses": {
+  "deontic/sara_numeric": [
+   {
+    "pool_id": "deontic/sara_numeric/test52",
+    "source_id": "tax_case_56",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test59",
+    "source_id": "tax_case_62",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test81",
+    "source_id": "tax_case_82",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test99",
+    "source_id": "tax_case_99",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test86",
+    "source_id": "tax_case_87",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test0",
+    "source_id": "tax_case_1",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test19",
+    "source_id": "tax_case_26",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test16",
+    "source_id": "tax_case_23",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test2",
+    "source_id": "tax_case_100",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test91",
+    "source_id": "tax_case_91",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test83",
+    "source_id": "tax_case_84",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test43",
+    "source_id": "tax_case_48",
+    "split": "stream",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test94",
+    "source_id": "tax_case_94",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test66",
+    "source_id": "tax_case_69",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test41",
+    "source_id": "tax_case_46",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test24",
+    "source_id": "tax_case_30",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test3",
+    "source_id": "tax_case_11",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test1",
+    "source_id": "tax_case_10",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test87",
+    "source_id": "tax_case_88",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test78",
+    "source_id": "tax_case_8",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test10",
+    "source_id": "tax_case_18",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test40",
+    "source_id": "tax_case_45",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test6",
+    "source_id": "tax_case_14",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test29",
+    "source_id": "tax_case_35",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test4",
+    "source_id": "tax_case_12",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test15",
+    "source_id": "tax_case_22",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test63",
+    "source_id": "tax_case_66",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test84",
+    "source_id": "tax_case_85",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test20",
+    "source_id": "tax_case_27",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test85",
+    "source_id": "tax_case_86",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test88",
+    "source_id": "tax_case_89",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test80",
+    "source_id": "tax_case_81",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test14",
+    "source_id": "tax_case_21",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test47",
+    "source_id": "tax_case_51",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test13",
+    "source_id": "tax_case_20",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test28",
+    "source_id": "tax_case_34",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test22",
+    "source_id": "tax_case_29",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test34",
+    "source_id": "tax_case_4",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test30",
+    "source_id": "tax_case_36",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test93",
+    "source_id": "tax_case_93",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test70",
+    "source_id": "tax_case_72",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test48",
+    "source_id": "tax_case_52",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test37",
+    "source_id": "tax_case_42",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test54",
+    "source_id": "tax_case_58",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "deontic/sara_numeric/test44",
+    "source_id": "tax_case_49",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   }
+  ],
+  "rulearena/airline": [
+   {
+    "pool_id": "rulearena/airline/test234",
+    "source_id": "a2_34",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test85",
+    "source_id": "a0_85",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test74",
+    "source_id": "a0_74",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test91",
+    "source_id": "a0_91",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test43",
+    "source_id": "a0_43",
+    "split": "stream",
+    "p_student": 0.333,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test125",
+    "source_id": "a1_25",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test98",
+    "source_id": "a0_98",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test222",
+    "source_id": "a2_22",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test197",
+    "source_id": "a1_97",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test134",
+    "source_id": "a1_34",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test133",
+    "source_id": "a1_33",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test15",
+    "source_id": "a0_15",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test55",
+    "source_id": "a0_55",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test214",
+    "source_id": "a2_14",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test83",
+    "source_id": "a0_83",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test233",
+    "source_id": "a2_33",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test272",
+    "source_id": "a2_72",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test245",
+    "source_id": "a2_45",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test221",
+    "source_id": "a2_21",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test61",
+    "source_id": "a0_61",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test181",
+    "source_id": "a1_81",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test264",
+    "source_id": "a2_64",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test231",
+    "source_id": "a2_31",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test295",
+    "source_id": "a2_95",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test278",
+    "source_id": "a2_78",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test180",
+    "source_id": "a1_80",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test154",
+    "source_id": "a1_54",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test23",
+    "source_id": "a0_23",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test146",
+    "source_id": "a1_46",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test254",
+    "source_id": "a2_54",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test140",
+    "source_id": "a1_40",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test238",
+    "source_id": "a2_38",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test17",
+    "source_id": "a0_17",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test0",
+    "source_id": "a0_0",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test229",
+    "source_id": "a2_29",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test158",
+    "source_id": "a1_58",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test8",
+    "source_id": "a0_8",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rulearena/airline/test73",
+    "source_id": "a0_73",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test38",
+    "source_id": "a0_38",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test126",
+    "source_id": "a1_26",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rulearena/airline/test18",
+    "source_id": "a0_18",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test9",
+    "source_id": "a0_9",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test130",
+    "source_id": "a1_30",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "rulearena/airline/test47",
+    "source_id": "a0_47",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rulearena/airline/test111",
+    "source_id": "a1_11",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 0.333
+   }
+  ],
+  "kor/logic_g0": [
+   {
+    "pool_id": "kor/logic_g0/test7",
+    "source_id": "logic_1_8",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/logic_g0/test20",
+    "source_id": "logic_3_21",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test30",
+    "source_id": "logic_4_31",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test12",
+    "source_id": "logic_2_13",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test43",
+    "source_id": "logic_5_44",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test5",
+    "source_id": "logic_1_6",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/logic_g0/test21",
+    "source_id": "logic_3_22",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test36",
+    "source_id": "logic_4_37",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test0",
+    "source_id": "logic_1_1",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test15",
+    "source_id": "logic_2_16",
+    "split": "stream",
+    "p_student": 0.667,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/logic_g0/test3",
+    "source_id": "logic_1_4",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test32",
+    "source_id": "logic_4_33",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test35",
+    "source_id": "logic_4_36",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test48",
+    "source_id": "logic_5_49",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test42",
+    "source_id": "logic_5_43",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test34",
+    "source_id": "logic_4_35",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test47",
+    "source_id": "logic_5_48",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/logic_g0/test49",
+    "source_id": "logic_5_50",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test19",
+    "source_id": "logic_2_20",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/logic_g0/test46",
+    "source_id": "logic_5_47",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test26",
+    "source_id": "logic_3_27",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test9",
+    "source_id": "logic_1_10",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test2",
+    "source_id": "logic_1_3",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test28",
+    "source_id": "logic_3_29",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test13",
+    "source_id": "logic_2_14",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test8",
+    "source_id": "logic_1_9",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test31",
+    "source_id": "logic_4_32",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/logic_g0/test38",
+    "source_id": "logic_4_39",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test4",
+    "source_id": "logic_1_5",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test29",
+    "source_id": "logic_3_30",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test25",
+    "source_id": "logic_3_26",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test16",
+    "source_id": "logic_2_17",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test14",
+    "source_id": "logic_2_15",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test11",
+    "source_id": "logic_2_12",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test44",
+    "source_id": "logic_5_45",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test40",
+    "source_id": "logic_5_41",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test23",
+    "source_id": "logic_3_24",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test45",
+    "source_id": "logic_5_46",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test18",
+    "source_id": "logic_2_19",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/logic_g0/test10",
+    "source_id": "logic_2_11",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test22",
+    "source_id": "logic_3_23",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test27",
+    "source_id": "logic_3_28",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test33",
+    "source_id": "logic_4_34",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/logic_g0/test17",
+    "source_id": "logic_2_18",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/logic_g0/test1",
+    "source_id": "logic_1_2",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   }
+  ],
+  "kor/cipher_g3": [
+   {
+    "pool_id": "kor/cipher_g3/test40",
+    "source_id": "cipher_20_191",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test16",
+    "source_id": "cipher_17_167",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test27",
+    "source_id": "cipher_18_178",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test3",
+    "source_id": "cipher_16_154",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test8",
+    "source_id": "cipher_16_159",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test17",
+    "source_id": "cipher_17_168",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test31",
+    "source_id": "cipher_19_182",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test23",
+    "source_id": "cipher_18_174",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test7",
+    "source_id": "cipher_16_158",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test28",
+    "source_id": "cipher_18_179",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test34",
+    "source_id": "cipher_19_185",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test45",
+    "source_id": "cipher_20_196",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test38",
+    "source_id": "cipher_19_189",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test19",
+    "source_id": "cipher_17_170",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test11",
+    "source_id": "cipher_17_162",
+    "split": "stream",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test44",
+    "source_id": "cipher_20_195",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test10",
+    "source_id": "cipher_17_161",
+    "split": "probe",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test33",
+    "source_id": "cipher_19_184",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test24",
+    "source_id": "cipher_18_175",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g3/test0",
+    "source_id": "cipher_16_151",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test1",
+    "source_id": "cipher_16_152",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test35",
+    "source_id": "cipher_19_186",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test30",
+    "source_id": "cipher_19_181",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test5",
+    "source_id": "cipher_16_156",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test20",
+    "source_id": "cipher_18_171",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test22",
+    "source_id": "cipher_18_173",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g3/test12",
+    "source_id": "cipher_17_163",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test36",
+    "source_id": "cipher_19_187",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test42",
+    "source_id": "cipher_20_193",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test41",
+    "source_id": "cipher_20_192",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test21",
+    "source_id": "cipher_18_172",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test13",
+    "source_id": "cipher_17_164",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test48",
+    "source_id": "cipher_20_199",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g3/test29",
+    "source_id": "cipher_18_180",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test6",
+    "source_id": "cipher_16_157",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test18",
+    "source_id": "cipher_17_169",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g3/test43",
+    "source_id": "cipher_20_194",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test9",
+    "source_id": "cipher_16_160",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test2",
+    "source_id": "cipher_16_153",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test46",
+    "source_id": "cipher_20_197",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test25",
+    "source_id": "cipher_18_176",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test15",
+    "source_id": "cipher_17_166",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test47",
+    "source_id": "cipher_20_198",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test37",
+    "source_id": "cipher_19_188",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g3/test32",
+    "source_id": "cipher_19_183",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   }
+  ],
+  "kor/cipher_g4": [
+   {
+    "pool_id": "kor/cipher_g4/test16",
+    "source_id": "cipher_22_217",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test45",
+    "source_id": "cipher_25_246",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test18",
+    "source_id": "cipher_22_219",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test8",
+    "source_id": "cipher_21_209",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test32",
+    "source_id": "cipher_24_233",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test40",
+    "source_id": "cipher_25_241",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test47",
+    "source_id": "cipher_25_248",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test6",
+    "source_id": "cipher_21_207",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test49",
+    "source_id": "cipher_25_250",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g4/test39",
+    "source_id": "cipher_24_240",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test17",
+    "source_id": "cipher_22_218",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test29",
+    "source_id": "cipher_23_230",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g4/test27",
+    "source_id": "cipher_23_228",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test11",
+    "source_id": "cipher_22_212",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g4/test9",
+    "source_id": "cipher_21_210",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test2",
+    "source_id": "cipher_21_203",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test37",
+    "source_id": "cipher_24_238",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test21",
+    "source_id": "cipher_23_222",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test25",
+    "source_id": "cipher_23_226",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test34",
+    "source_id": "cipher_24_235",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test43",
+    "source_id": "cipher_25_244",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test26",
+    "source_id": "cipher_23_227",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test44",
+    "source_id": "cipher_25_245",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test36",
+    "source_id": "cipher_24_237",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test4",
+    "source_id": "cipher_21_205",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test10",
+    "source_id": "cipher_22_211",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test15",
+    "source_id": "cipher_22_216",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test46",
+    "source_id": "cipher_25_247",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g4/test35",
+    "source_id": "cipher_24_236",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test33",
+    "source_id": "cipher_24_234",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test1",
+    "source_id": "cipher_21_202",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test31",
+    "source_id": "cipher_24_232",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test13",
+    "source_id": "cipher_22_214",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test0",
+    "source_id": "cipher_21_201",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test19",
+    "source_id": "cipher_22_220",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test28",
+    "source_id": "cipher_23_229",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/cipher_g4/test12",
+    "source_id": "cipher_22_213",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test3",
+    "source_id": "cipher_21_204",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test24",
+    "source_id": "cipher_23_225",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test5",
+    "source_id": "cipher_21_206",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test14",
+    "source_id": "cipher_22_215",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test20",
+    "source_id": "cipher_23_221",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/cipher_g4/test7",
+    "source_id": "cipher_21_208",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test42",
+    "source_id": "cipher_25_243",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/cipher_g4/test38",
+    "source_id": "cipher_24_239",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   }
+  ],
+  "kor/puzzle_g0": [
+   {
+    "pool_id": "kor/puzzle_g0/test45",
+    "source_id": "puzzle_5_46",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test30",
+    "source_id": "puzzle_4_31",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test25",
+    "source_id": "puzzle_3_26",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test0",
+    "source_id": "puzzle_1_1",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test46",
+    "source_id": "puzzle_5_47",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test34",
+    "source_id": "puzzle_4_35",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test33",
+    "source_id": "puzzle_4_34",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test41",
+    "source_id": "puzzle_5_42",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test7",
+    "source_id": "puzzle_1_8",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test47",
+    "source_id": "puzzle_5_48",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test49",
+    "source_id": "puzzle_5_50",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test2",
+    "source_id": "puzzle_1_3",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test38",
+    "source_id": "puzzle_4_39",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test24",
+    "source_id": "puzzle_3_25",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test21",
+    "source_id": "puzzle_3_22",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test43",
+    "source_id": "puzzle_5_44",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test32",
+    "source_id": "puzzle_4_33",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test36",
+    "source_id": "puzzle_4_37",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test20",
+    "source_id": "puzzle_3_21",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test39",
+    "source_id": "puzzle_4_40",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test6",
+    "source_id": "puzzle_1_7",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test37",
+    "source_id": "puzzle_4_38",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test35",
+    "source_id": "puzzle_4_36",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test1",
+    "source_id": "puzzle_1_2",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test11",
+    "source_id": "puzzle_2_12",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test42",
+    "source_id": "puzzle_5_43",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test23",
+    "source_id": "puzzle_3_24",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test5",
+    "source_id": "puzzle_1_6",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test26",
+    "source_id": "puzzle_3_27",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test15",
+    "source_id": "puzzle_2_16",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test29",
+    "source_id": "puzzle_3_30",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test19",
+    "source_id": "puzzle_2_20",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test3",
+    "source_id": "puzzle_1_4",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test13",
+    "source_id": "puzzle_2_14",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test4",
+    "source_id": "puzzle_1_5",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test18",
+    "source_id": "puzzle_2_19",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test9",
+    "source_id": "puzzle_1_10",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test17",
+    "source_id": "puzzle_2_18",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test40",
+    "source_id": "puzzle_5_41",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test22",
+    "source_id": "puzzle_3_23",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test8",
+    "source_id": "puzzle_1_9",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test12",
+    "source_id": "puzzle_2_13",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test10",
+    "source_id": "puzzle_2_11",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test44",
+    "source_id": "puzzle_5_45",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g0/test16",
+    "source_id": "puzzle_2_17",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   }
+  ],
+  "kor/puzzle_g1": [
+   {
+    "pool_id": "kor/puzzle_g1/test4",
+    "source_id": "puzzle_6_55",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test49",
+    "source_id": "puzzle_10_100",
+    "split": "stream",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test46",
+    "source_id": "puzzle_10_97",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test1",
+    "source_id": "puzzle_6_52",
+    "split": "stream",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test20",
+    "source_id": "puzzle_8_71",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test40",
+    "source_id": "puzzle_10_91",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test37",
+    "source_id": "puzzle_9_88",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test8",
+    "source_id": "puzzle_6_59",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test35",
+    "source_id": "puzzle_9_86",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test42",
+    "source_id": "puzzle_10_93",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test12",
+    "source_id": "puzzle_7_63",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test45",
+    "source_id": "puzzle_10_96",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test10",
+    "source_id": "puzzle_7_61",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test14",
+    "source_id": "puzzle_7_65",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test28",
+    "source_id": "puzzle_8_79",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test23",
+    "source_id": "puzzle_8_74",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test44",
+    "source_id": "puzzle_10_95",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test31",
+    "source_id": "puzzle_9_82",
+    "split": "probe",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test27",
+    "source_id": "puzzle_8_78",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test36",
+    "source_id": "puzzle_9_87",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test15",
+    "source_id": "puzzle_7_66",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test24",
+    "source_id": "puzzle_8_75",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test30",
+    "source_id": "puzzle_9_81",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test26",
+    "source_id": "puzzle_8_77",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test6",
+    "source_id": "puzzle_6_57",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test25",
+    "source_id": "puzzle_8_76",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test32",
+    "source_id": "puzzle_9_83",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test43",
+    "source_id": "puzzle_10_94",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test3",
+    "source_id": "puzzle_6_54",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test17",
+    "source_id": "puzzle_7_68",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test41",
+    "source_id": "puzzle_10_92",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test16",
+    "source_id": "puzzle_7_67",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test21",
+    "source_id": "puzzle_8_72",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test11",
+    "source_id": "puzzle_7_62",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test34",
+    "source_id": "puzzle_9_85",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test48",
+    "source_id": "puzzle_10_99",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test29",
+    "source_id": "puzzle_8_80",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test33",
+    "source_id": "puzzle_9_84",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test22",
+    "source_id": "puzzle_8_73",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test47",
+    "source_id": "puzzle_10_98",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test38",
+    "source_id": "puzzle_9_89",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test2",
+    "source_id": "puzzle_6_53",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test18",
+    "source_id": "puzzle_7_69",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test13",
+    "source_id": "puzzle_7_64",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   },
+   {
+    "pool_id": "kor/puzzle_g1/test9",
+    "source_id": "puzzle_6_60",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.0
+   }
+  ],
+  "rule_world/o6l3/w00": [
+   {
+    "pool_id": "rule_world/o6l3/w00/test21",
+    "source_id": "rule_world/o6l3/w00/test21",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test17",
+    "source_id": "rule_world/o6l3/w00/test17",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream10",
+    "source_id": "rule_world/o6l3/w00/stream10",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test27",
+    "source_id": "rule_world/o6l3/w00/test27",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test24",
+    "source_id": "rule_world/o6l3/w00/test24",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test19",
+    "source_id": "rule_world/o6l3/w00/test19",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream0",
+    "source_id": "rule_world/o6l3/w00/stream0",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test20",
+    "source_id": "rule_world/o6l3/w00/test20",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test0",
+    "source_id": "rule_world/o6l3/w00/test0",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream13",
+    "source_id": "rule_world/o6l3/w00/stream13",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test22",
+    "source_id": "rule_world/o6l3/w00/test22",
+    "split": "stream",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test18",
+    "source_id": "rule_world/o6l3/w00/test18",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream14",
+    "source_id": "rule_world/o6l3/w00/stream14",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test6",
+    "source_id": "rule_world/o6l3/w00/test6",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test13",
+    "source_id": "rule_world/o6l3/w00/test13",
+    "split": "stream",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test3",
+    "source_id": "rule_world/o6l3/w00/test3",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/probe4",
+    "source_id": "rule_world/o6l3/w00/probe4",
+    "split": "probe",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream5",
+    "source_id": "rule_world/o6l3/w00/stream5",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test23",
+    "source_id": "rule_world/o6l3/w00/test23",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/probe8",
+    "source_id": "rule_world/o6l3/w00/probe8",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream18",
+    "source_id": "rule_world/o6l3/w00/stream18",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream3",
+    "source_id": "rule_world/o6l3/w00/stream3",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream11",
+    "source_id": "rule_world/o6l3/w00/stream11",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test4",
+    "source_id": "rule_world/o6l3/w00/test4",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test15",
+    "source_id": "rule_world/o6l3/w00/test15",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test11",
+    "source_id": "rule_world/o6l3/w00/test11",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream12",
+    "source_id": "rule_world/o6l3/w00/stream12",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/probe5",
+    "source_id": "rule_world/o6l3/w00/probe5",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream4",
+    "source_id": "rule_world/o6l3/w00/stream4",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test12",
+    "source_id": "rule_world/o6l3/w00/test12",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/probe1",
+    "source_id": "rule_world/o6l3/w00/probe1",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream1",
+    "source_id": "rule_world/o6l3/w00/stream1",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test16",
+    "source_id": "rule_world/o6l3/w00/test16",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream9",
+    "source_id": "rule_world/o6l3/w00/stream9",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test14",
+    "source_id": "rule_world/o6l3/w00/test14",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/probe0",
+    "source_id": "rule_world/o6l3/w00/probe0",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/probe7",
+    "source_id": "rule_world/o6l3/w00/probe7",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test2",
+    "source_id": "rule_world/o6l3/w00/test2",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream7",
+    "source_id": "rule_world/o6l3/w00/stream7",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream16",
+    "source_id": "rule_world/o6l3/w00/stream16",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/probe3",
+    "source_id": "rule_world/o6l3/w00/probe3",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test26",
+    "source_id": "rule_world/o6l3/w00/test26",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/stream15",
+    "source_id": "rule_world/o6l3/w00/stream15",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test5",
+    "source_id": "rule_world/o6l3/w00/test5",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w00/test28",
+    "source_id": "rule_world/o6l3/w00/test28",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   }
+  ],
+  "rule_world/o6l3/w08": [
+   {
+    "pool_id": "rule_world/o6l3/w08/test4",
+    "source_id": "rule_world/o6l3/w08/test4",
+    "split": "stream",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe3",
+    "source_id": "rule_world/o6l3/w08/probe3",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream17",
+    "source_id": "rule_world/o6l3/w08/stream17",
+    "split": "stream",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test12",
+    "source_id": "rule_world/o6l3/w08/test12",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test22",
+    "source_id": "rule_world/o6l3/w08/test22",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test8",
+    "source_id": "rule_world/o6l3/w08/test8",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream16",
+    "source_id": "rule_world/o6l3/w08/stream16",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream15",
+    "source_id": "rule_world/o6l3/w08/stream15",
+    "split": "stream",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe1",
+    "source_id": "rule_world/o6l3/w08/probe1",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test16",
+    "source_id": "rule_world/o6l3/w08/test16",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test15",
+    "source_id": "rule_world/o6l3/w08/test15",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test17",
+    "source_id": "rule_world/o6l3/w08/test17",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test18",
+    "source_id": "rule_world/o6l3/w08/test18",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream12",
+    "source_id": "rule_world/o6l3/w08/stream12",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test7",
+    "source_id": "rule_world/o6l3/w08/test7",
+    "split": "stream",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test23",
+    "source_id": "rule_world/o6l3/w08/test23",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream14",
+    "source_id": "rule_world/o6l3/w08/stream14",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe5",
+    "source_id": "rule_world/o6l3/w08/probe5",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe7",
+    "source_id": "rule_world/o6l3/w08/probe7",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test3",
+    "source_id": "rule_world/o6l3/w08/test3",
+    "split": "probe",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test10",
+    "source_id": "rule_world/o6l3/w08/test10",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test26",
+    "source_id": "rule_world/o6l3/w08/test26",
+    "split": "probe",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe8",
+    "source_id": "rule_world/o6l3/w08/probe8",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream2",
+    "source_id": "rule_world/o6l3/w08/stream2",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test0",
+    "source_id": "rule_world/o6l3/w08/test0",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream19",
+    "source_id": "rule_world/o6l3/w08/stream19",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe6",
+    "source_id": "rule_world/o6l3/w08/probe6",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test19",
+    "source_id": "rule_world/o6l3/w08/test19",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream3",
+    "source_id": "rule_world/o6l3/w08/stream3",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test6",
+    "source_id": "rule_world/o6l3/w08/test6",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test1",
+    "source_id": "rule_world/o6l3/w08/test1",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream18",
+    "source_id": "rule_world/o6l3/w08/stream18",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream0",
+    "source_id": "rule_world/o6l3/w08/stream0",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream5",
+    "source_id": "rule_world/o6l3/w08/stream5",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream10",
+    "source_id": "rule_world/o6l3/w08/stream10",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream9",
+    "source_id": "rule_world/o6l3/w08/stream9",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test29",
+    "source_id": "rule_world/o6l3/w08/test29",
+    "split": "test",
+    "p_student": 0.667,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe4",
+    "source_id": "rule_world/o6l3/w08/probe4",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.667
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/stream1",
+    "source_id": "rule_world/o6l3/w08/stream1",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 0.333
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test24",
+    "source_id": "rule_world/o6l3/w08/test24",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test21",
+    "source_id": "rule_world/o6l3/w08/test21",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/probe9",
+    "source_id": "rule_world/o6l3/w08/probe9",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test14",
+    "source_id": "rule_world/o6l3/w08/test14",
+    "split": "test",
+    "p_student": 1.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test5",
+    "source_id": "rule_world/o6l3/w08/test5",
+    "split": "test",
+    "p_student": 0.0,
+    "p_teacher": 1.0
+   },
+   {
+    "pool_id": "rule_world/o6l3/w08/test27",
+    "source_id": "rule_world/o6l3/w08/test27",
+    "split": "test",
+    "p_student": 0.333,
+    "p_teacher": 1.0
+   }
+  ]
+ }
+}

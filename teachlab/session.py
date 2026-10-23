@@ -17,6 +17,7 @@ Conditions (CONDITIONS below):
     tutor         teacher-led dialogue -> final attempt -> feedback -> update
     placebo       tutor without the document
     teacher_note  attempt -> feedback -> the teacher rewrites the student's notebook
+    tutor_note    tutor, but the teacher (not the student) rewrites the notebook after the dialogue
 With --teacher-until W, sessions after W run as `self` (the teacher is withdrawn).
 """
 
@@ -38,6 +39,7 @@ CONDITIONS = {
     "tutor": {"teacher": "tutor"},
     "placebo": {"teacher": "placebo"},
     "teacher_note": {"teacher": "note"},
+    "tutor_note": {"teacher": "tutor", "notes_by": "teacher"},
 }
 
 
@@ -279,7 +281,8 @@ def run_session(ctx, scn, cond, item, state, t):
             rec["critique"], log["violations"] = critique_phase(ctx, scn, item, state, rec)
 
     teacher_text = "\n".join([t for s, t in rec.get("dialogue", []) if s == "teacher"] + [rec.get("critique", "")])
-    new_state, info = update_memory(ctx, scn, state, rec, "teacher" if teacher == "note" else "student")
+    teacher_writes = teacher == "note" or (teacher and spec.get("notes_by") == "teacher")
+    new_state, info = update_memory(ctx, scn, state, rec, "teacher" if teacher_writes else "student")
     log.update(info)
     log.update({
         "first_attempt_score": rec["attempts"][0]["score"], "last_attempt_score": rec["attempts"][-1]["score"],

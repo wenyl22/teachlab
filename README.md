@@ -25,10 +25,11 @@ One scenario is one course. The format is defined in [schema.py](teachlab/schema
   - `probe`: tested after each session and is disjoint from `test`;
   - `test`: the sealed final evaluation.
 
-- Each item carries its own `grader`, of one of three types:
+- Each item carries its own `grader`, of one of these types:
   - `rubric`: an LLM judge using CL-bench's judge prompt, with optional breakdown by doc / instruction / general rubrics;
   - `exec`: runs the code against test cases (SE-Bench);
-  - `exact`: exact match on the final answer.
+  - `exact`: exact match on the final answer;
+  - TeachMix's `numeric`, `nba`, `choice`, `kor`, `pyexec`, `chrf` and `rg` ([teachmix/graders.py](teachlab/teachmix/graders.py)).
 
 ## Sources
 
@@ -38,6 +39,7 @@ One scenario is one course. The format is defined in [schema.py](teachlab/schema
 | SE-Bench (the zwc library) | `bash teachlab/download_sebench.sh && python -m teachlab.adapters.sebench --funcs 8` | 7–8 functions, 10–19 stream, 3–5 probe and 9–12 test items per course (verified rows); documents ~2.6–3.6k words | exec |
 | SE-Bench, full-library docs | the command above with `--doc-scope library` | document ~97k words, too large for the notebook | exec |
 | Generated rule worlds | `python -m teachlab.adapters.rule_world --ops 6 --length 3` | any number of items; `--ops` sets the knowledge volume, `--length` the difficulty of applying it | exact |
+| TeachMix v1 (statutes, a rulebook, invented rules, rule worlds) | `python -m teachlab.teachmix.build v1`, after the data downloads in [teachmix/README.md](teachlab/teachmix/README.md) | 9 courses × 45 items (15 stream / 7 probe / 23 test), calibrated for a Qwen3-4B student (~15%) and a Qwen3.8-27B teacher (~60% with the doc) | numeric, kor, exact |
 
 **Adding a source**: write an adapter that outputs jsonl in the format above. Hand-written scenarios can also be written directly as jsonl.
 
@@ -72,6 +74,10 @@ Full definitions are in [session.py](teachlab/session.py).
 
 2. **Is multi-session teaching worth more than telling the rules once?** Compare `tutor` against `summary`. `none` and `doc` set the range that the other three fall in.
 
+**Teacher-written notebooks.** In two more conditions the teacher, not the student, rewrites the notebook after each session:
+- `teacher_note`: attempt → feedback → the teacher rewrites the notebook;
+- `tutor_note`: as `tutor`, then the teacher rewrites the notebook after the dialogue.
+
 
 - **Memory**:
   - `--memory notebook`: the notebook is rewritten after every session, capped at `--budget` words (B);
@@ -85,7 +91,7 @@ Full definitions are in [session.py](teachlab/session.py).
 - **Validation:** GEPA selects candidates on probe scores. The teacher never sees probe problems. `--val-from-stream N` holds back the last N stream items instead, leaving probe and test untouched.
 - **Output:** a final probe/test evaluation, in `run.py`'s record format (`k = 0`). The record also includes every candidate, its parents and its validation score, plus a log of every teacher call.
 
-Budget: `--max-metric-calls` (student rollouts per course, default 300) and optionally `--max-rewrites` (teacher rewrites). Seeds: an empty notebook, or `--seed-from <run dir>` to start from that run's `summary` notes. Finished courses are skipped, and unfinished ones resume from their GEPA state.
+Budget: `--max-metric-calls` (student rollouts per course, default 300) and optionally `--max-rewrites` (teacher rewrites). `--train-items N` limits the trainset to the first N stream items, e.g. the 10 problems a 10-session run sees. Seeds: an empty notebook, or `--seed-from <run dir>` to start from that run's `summary` notes. Finished courses are skipped, and unfinished ones resume from their GEPA state.
 
 ```bash
 python -m teachlab.gepa_notes --scenarios teachlab/scenarios/rule_world_o6l3.jsonl --out teachlab/outputs/gepa_rw \
